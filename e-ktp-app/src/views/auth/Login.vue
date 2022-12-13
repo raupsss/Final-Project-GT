@@ -13,10 +13,7 @@
       <div class="forms">
         <div class="form-content">
           <div class="login-form">
-            <div class="title">
-              Selamat Datang
-              <font-awesome-icon icon="fa-solid fa-hands-wash" />
-            </div>
+            <div class="title">Selamat Datang</div>
             <form action="#">
               <div class="input-boxes">
                 <div class="input-box">
@@ -26,7 +23,7 @@
                   <input type="password" placeholder="Password" required />
                 </div>
                 <router-link
-                  to="/home"
+                  to="/"
                   type="submit"
                   class="btn btn-primary w-100 mt-4"
                 >
@@ -79,7 +76,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 * {
   margin: 0;
   padding: 0;
