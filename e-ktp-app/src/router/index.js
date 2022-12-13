@@ -37,6 +37,11 @@ const routes = [
         path: '/detailKK',
         name: 'DetailPage',
         component: () => import('../views/DetailView')
+      },
+      {
+        path: '/listAnggota',
+        name: 'ListAnggota',
+        component: () => import('../views/ListAnggota')
       }
     ]
   },
