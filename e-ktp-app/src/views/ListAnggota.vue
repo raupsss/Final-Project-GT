@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="mb-5">
-          <router-link to="/" type="submit" class="btn btn-info mr-2"
+          <router-link to="/home" type="submit" class="btn btn-info mr-2"
             >Back</router-link
           >
           <router-link to="/listAnggota" type="submit" class="btn btn-primary"

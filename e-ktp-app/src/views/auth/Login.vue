@@ -23,7 +23,7 @@
                   <input type="password" placeholder="Password" required />
                 </div>
                 <router-link
-                  to="/"
+                  to="/home"
                   type="submit"
                   class="btn btn-primary w-100 mt-4"
                 >

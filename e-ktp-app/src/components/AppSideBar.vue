@@ -9,7 +9,7 @@
       justify-content-between
     "
   >
-    <router-link to="/" class="brand-link elevation-5 bg-info">
+    <router-link to="/home" class="brand-link elevation-5 bg-info">
       <img src="@/assets/ktp.png" class="brand-image img-circle elevation-3" />
       <span class="brand-text font-weight-bold ml-2">E-KTP APP</span>
     </router-link>
@@ -23,7 +23,7 @@
           data-accordion="false"
         >
           <li class="nav-item">
-            <router-link to="/" class="nav-link text-white">
+            <router-link to="/home" class="nav-link text-white">
               <i class="fas fa-home"></i>
               <p class="ml-2">Home</p>
             </router-link>
@@ -48,7 +48,7 @@
             data-accordion="false"
           >
             <li class="nav-item">
-              <router-link to="/login" class="nav-link text-white">
+              <router-link to="/" class="nav-link text-white">
                 <i class="fas fa-sign-out-alt"></i>
                 <p class="ml-2">Sign Out</p>
               </router-link>

@@ -19,12 +19,12 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   // }
   {
-    path: '',
+    path: '/home',
     // name: 'DefaultLayout',
     component: () => import('../layouts/DefaultLayout'),
     children: [
       {
-        path: '/',
+        path: '/home',
         name: 'HomePage',
         component: () => import('../views/HomeView')
       },
@@ -34,7 +34,7 @@ const routes = [
         component: () => import('../views/AddView')
       },
       {
-        path: '/detailKK',
+        path: '/detailKK/:id',
         name: 'DetailPage',
         component: () => import('../views/DetailView')
       },
@@ -51,12 +51,12 @@ const routes = [
     component: () => import('../layouts/BlankLayout'),
     children: [
       {
-        path: '/login',
+        path: '/',
         name: 'LoginPage',
         component: () => import('../views/auth/Login')
       }
     ]
-  }
+  },
 ]
 
 const router = new VueRouter({

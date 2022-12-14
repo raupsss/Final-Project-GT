@@ -16,13 +16,14 @@ import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js'
 import 'admin-lte/dist/js/adminlte.min.js?v=3.2.0'
 
 /* ------------ Global Components -------------- */
-import AppNavBar from './components/partials/AppNavBar'
-import AppSideBar from './components/partials/AppSideBar'
+import AppNavBar from './components/AppNavBar'
+import AppSideBar from './components/AppSideBar'
+import AppSuccess from './components/AppSuccess'
 
 
 Vue.component('AppNavBar', AppNavBar)
 Vue.component('AppSideBar', AppSideBar)
-
+Vue.component('AppSuccess', AppSuccess)
 
 
 new Vue({
