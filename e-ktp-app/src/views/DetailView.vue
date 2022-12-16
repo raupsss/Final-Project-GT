@@ -21,7 +21,12 @@
             >
               Update Kartu Keluarga
             </button>
-            <router-link to="/listAnggota" type="submit" class="btn btn-primary"
+            <router-link
+              :to="{
+                name: 'ListAnggota',
+              }"
+              type="submit"
+              class="btn btn-primary"
               >Lihat Anggota Keluarga</router-link
             >
           </div>
@@ -169,7 +174,7 @@
                     <input
                       v-model="dataKK.kode_pos"
                       :disabled="isDisabled"
-                      type="kode_pos"
+                      type="number"
                       class="form-control"
                       id="kode_pos"
                       placeholder="Kode Pos"
@@ -202,7 +207,7 @@
 </template>
 
 <script>
-import kartuKeluargaService from "@/services/kartuKeluargaService";
+import kartuKeluargaService from "@/services/ektpService";
 export default {
   name: "DetailView",
   data() {

@@ -4,76 +4,24 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-sm-6">
-            <h1>Anggota Keluarga</h1>
+            <h1>Detail Anggota Keluarga</h1>
           </div>
         </div>
         <app-success v-show="success" />
         <div v-show="!success">
-          <!-- DISINI -->
-          <button @click="back" type="submit" class="btn btn-info mr-2">
+          <button type="submit" class="btn btn-info mr-3" @click="back">
             Back
           </button>
           <button
             type="submit"
-            class="btn btn-primary"
-            v-show="isDisplay"
-            @click.prevent="tambahAnggotaFunc"
+            class="btn btn-warning"
+            @click.prevent="updateButton"
+            v-show="!update"
           >
-            Tambah Anggota Keluarga
+            Update Anggota
           </button>
-          <table
-            v-show="isDisplay"
-            class="
-              table table-striped table-hover
-              bg-white
-              border border-rounded
-              mt-5
-            "
-          >
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">NIK</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Jenis Kelamin</th>
-                <th scope="col">Kepala Keluarga</th>
-                <th scope="col">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in dataAnggota" :key="index">
-                <th scope="row">{{ (index += 1) }}</th>
-                <td>{{ item.nik }}</td>
-                <td>{{ item.nama }}</td>
-                <td>{{ item.jenis_kelamin }}</td>
-                <td>{{ item.kepala_keluarga }}</td>
-                <td>
-                  <router-link
-                    :to="{
-                      name: 'DetailAnggota',
-                      params: { idAnggota: item.id },
-                    }"
-                    type="submit"
-                    class="btn btn-warning mr-1 text-white"
-                  >
-                    Detail
-                  </router-link>
-                  <button
-                    type="submit"
-                    class="btn btn-danger"
-                    @click.prevent="deleteAnggota(item.id)"
-                  >
-                    Hapus
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <!-- FORM TAMBAH ANGGOTA -->
           <form
-            v-show="!isDisplay"
-            @submit.prevent="addAnggota"
+            @submit.prevent="updateAnggota"
             action=""
             class="border p-5 my-5"
             style="background-color: white"
@@ -86,6 +34,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <input
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.nik"
                       type="number"
                       class="form-control"
@@ -100,6 +49,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <input
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.nama"
                       type="text"
                       class="form-control"
@@ -116,6 +66,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <select
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.jenis_kelamin"
                       name="jenis_kelamin"
                       id="jenis_kelamin"
@@ -135,6 +86,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <input
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.tempat_lahir"
                       type="text"
                       class="form-control"
@@ -153,6 +105,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <input
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.tanggal_lahir"
                       type="date"
                       class="form-control"
@@ -167,6 +120,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <input
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.agama"
                       type="text"
                       class="form-control"
@@ -183,6 +137,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <input
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.pendidikan"
                       type="text"
                       class="form-control"
@@ -199,6 +154,7 @@
                   >
                   <div class="col-md-6 col-sm-10">
                     <select
+                      :disabled="isDisabled"
                       v-model="dataTambahAnggota.kepala_keluarga"
                       name="kepala_keluarga"
                       id="kepala_keluarga"
@@ -212,9 +168,16 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-success mt-5" @click="addIdKK">
-              Submit
-            </button>
+            <div v-show="update">
+              <button
+                type="submit"
+                class="btn btn-danger mt-5"
+                @click.prevent="cancelUpdate"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-success mt-5">Update</button>
+            </div>
           </form>
         </div>
       </div>
@@ -223,13 +186,12 @@
 </template>
 
 <script>
-import anggotaService from "@/services/ektpService";
-
+import anggotaService from "../services/ektpService";
 export default {
-  name: "ListAnggota",
+  nama: "DetailAnggota",
+
   data() {
     return {
-      dataAnggota: [],
       dataTambahAnggota: {
         agama: null,
         id_kk: null,
@@ -241,34 +203,45 @@ export default {
         tanggal_lahir: null,
         tempat_lahir: null,
       },
-      isDisplay: true,
       success: false,
+      update: false,
+      isDisabled: true,
     };
   },
 
   methods: {
-    getAllAnggota() {
-      anggotaService.getAllAnggota().then((response) => {
-        this.dataAnggota = response.data;
-        console.log(this.dataAnggota);
-      });
+    back() {
+      window.history.back();
     },
 
-    getIdKK(id) {
-      anggotaService.getIdKK(id).then((response) => {
-        this.dataAnggota = response.data;
-        console.log(this.dataAnggota);
-      });
+    updateButton() {
+      this.isDisabled = false;
+      this.update = true;
     },
 
-    tambahAnggotaFunc() {
-      this.isDisplay = false;
+    cancelUpdate() {
+      location.reload();
     },
 
-    addAnggota() {
-      let data = this.dataTambahAnggota;
+    getAnggota() {
+      let id = this.$route.params.idAnggota;
       anggotaService
-        .addAnggota(data)
+        .getAnggota(id)
+        .then((response) => {
+          this.dataTambahAnggota = response.data;
+          console.log(this.dataTambahAnggota);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
+    updateAnggota() {
+      let data = this.dataTambahAnggota;
+      let id = this.$route.params.idAnggota;
+
+      anggotaService
+        .updateAnggota(id, data)
         .then((response) => {
           this.dataTambahAnggota = response.data;
           console.log(this.dataTambahAnggota);
@@ -278,34 +251,9 @@ export default {
           console.log(e);
         });
     },
-
-    addIdKK() {
-      this.dataTambahAnggota.id_kk = this.$route.params.id;
-    },
-
-    back() {
-      window.history.back();
-    },
-
-    deleteAnggota(id) {
-      if (confirm("yakin mau hapus ?")) {
-        anggotaService
-          .deleteAnggota(id)
-          .then((response) => {
-            console.log(response.data);
-            location.reload();
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    },
   },
-
   mounted() {
-    if (this.$route.name == "ListAnggota") {
-      this.getIdKK(this.$route.params.id);
-    }
+    this.getAnggota();
   },
 };
 </script>

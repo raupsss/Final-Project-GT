@@ -1,10 +1,10 @@
-package com.example.backend_ektp.repository;
+package com.example.backend_ektp.service;
 
 import java.util.List;
 
 import com.example.backend_ektp.model.AnggotaKeluarga;
 
-public interface IAnggotaKeluargaRepo {
+public interface IAnggotaKeluargaService {
 
     public AnggotaKeluarga addAnggota(AnggotaKeluarga anggotaKeluarga);
 

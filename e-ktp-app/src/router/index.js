@@ -39,10 +39,16 @@ const routes = [
         component: () => import('../views/DetailView')
       },
       {
-        path: '/listAnggota',
+        path: '/detailKK/:id/listAnggota',
         name: 'ListAnggota',
         component: () => import('../views/ListAnggota')
+      },
+      {
+        path: '/detailKK/:id/listAnggota/detailAnggota/:idAnggota',
+        name: 'DetailAnggota',
+        component: () => import('../views/DetailAnggota')
       }
+
     ]
   },
   {

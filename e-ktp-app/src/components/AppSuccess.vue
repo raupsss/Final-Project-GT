@@ -7,20 +7,20 @@
           Data berhasil di
           <strong>{{ message }}</strong>
         </p>
-        <router-link
+        <button
           class="btn btn-primary"
-          to="/home"
+          @click="reloadPage"
           v-if="message == 'Kirim!'"
         >
           Close
-        </router-link>
-        <router-link
+        </button>
+        <button
           class="btn btn-primary"
-          to="/home"
-          v-else-if="message == 'Diperbarui!'"
+          @click="back"
+          v-else-if="message == 'Hapus!'"
         >
-          Close
-        </router-link>
+          Back
+        </button>
         <button v-else class="btn btn-primary" @click="reloadPage">
           Close
         </button>
@@ -41,16 +41,19 @@ export default {
   methods: {
     changeMessage() {
       let route = this.$route.fullPath;
-      if (route === "/addKK") {
+      if(route === "/addKK" || "/detailKK/:id/listAnggota"){
         this.message = "Kirim!";
-      } else if (route === "/home") {
-        this.message = "Hapus!";
+      }else if("/home"){
+        this.message = "Hapus!"
       } else {
-        this.message = "Diperbarui!";
+        this.message = "Perbarui!"
       }
     },
     reloadPage() {
       location.reload();
+    },
+    back() {
+      window.history.back();
     },
   },
 

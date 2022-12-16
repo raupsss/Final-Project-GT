@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import kartuKeluargaService from "@/services/kartuKeluargaService";
+import kartuKeluargaService from "@/services/ektpService";
 // import kartuKeluargaService from "@/services/kartuKeluargaService";
 export default {
   name: "AddView",

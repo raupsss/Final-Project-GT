@@ -27,7 +27,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Jumlah Seluruh Warga</h4>
-                  <h1 class="card-text">0</h1>
+                  <h1 class="card-text">{{ dataAnggota.length }}</h1>
                 </div>
               </div>
             </div>
@@ -99,13 +99,14 @@
 </template>
 
 <script>
-import kartuKeluargaService from "@/services/kartuKeluargaService";
+import kartuKeluargaService from "@/services/ektpService";
 
 export default {
   name: "HomeView",
   data() {
     return {
       dataKK: [],
+      dataAnggota: [],
       success: false,
     };
   },
@@ -123,6 +124,13 @@ export default {
         });
     },
 
+    getAllAnggota() {
+      kartuKeluargaService.getAllAnggota().then((response) => {
+        this.dataAnggota = response.data;
+        console.log(this.dataAnggota);
+      });
+    },
+
     deleteKK(id) {
       if (
         confirm("Apakah Anda akan menghapus data KK ini beserta anggotanya ?")
@@ -131,7 +139,7 @@ export default {
           .deleteKK(id)
           .then((response) => {
             console.log(response.data);
-            this.success = true;
+            location.reload();
           })
           .catch((e) => {
             console.log(e);
@@ -142,6 +150,7 @@ export default {
 
   mounted() {
     this.getAllKK();
+    this.getAllAnggota();
   },
 };
 </script>
