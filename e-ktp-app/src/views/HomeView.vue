@@ -139,6 +139,14 @@ export default {
           .deleteKK(id)
           .then((response) => {
             console.log(response.data);
+            kartuKeluargaService
+              .deleteAllAnggota(id)
+              .then((response) => {
+                console.log(response.data);
+              })
+              .catch((e) => {
+                console.log(e);
+              });
             location.reload();
           })
           .catch((e) => {

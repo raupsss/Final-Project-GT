@@ -18,4 +18,6 @@ public interface IAnggotaKeluargaRepo {
 
     public List<AnggotaKeluarga> getIdKK(String id_kk);
 
+    public List<AnggotaKeluarga> deleteAllAnggota(String id_kk);
+
 }

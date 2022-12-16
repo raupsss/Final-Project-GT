@@ -55,4 +55,9 @@ public class AnggotaKeluargaController {
         return anggotaKeluargaService.getIdKK(id_kk);
     }
 
+    @DeleteMapping("/deleteAllAnggota/{id_kk}")
+    public List<AnggotaKeluarga> deleteAllAnggota(@PathVariable String id_kk){
+        return anggotaKeluargaService.deleteAllAnggota(id_kk);
+    }
+
 }

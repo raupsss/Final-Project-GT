@@ -76,4 +76,17 @@ public class AnggotaKeluargaRepo implements IAnggotaKeluargaRepo {
         return jdbcTemplate.query(query, new BeanPropertyRowMapper<>(AnggotaKeluarga.class), id_kk);
     }
 
+    @Override
+    public List<AnggotaKeluarga> deleteAllAnggota(String id_kk) {
+
+        String query = "SELECT * FROM tb_anggota_keluarga WHERE id_kk = ?";
+        var result = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(AnggotaKeluarga.class), id_kk);
+
+        query = "DELETE FROM tb_anggota_keluarga WHERE id_kk = ?";
+        jdbcTemplate.update(query, id_kk);
+
+        return result;
+
+    }
+
 }

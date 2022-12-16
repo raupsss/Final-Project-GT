@@ -40,13 +40,13 @@ export default {
 
   methods: {
     changeMessage() {
-      let route = this.$route.fullPath;
-      if(route === "/addKK" || "/detailKK/:id/listAnggota"){
+      let route = this.$route.name;
+      if (route === "HomePage" || route === "ListAnggota") {
         this.message = "Kirim!";
-      }else if("/home"){
-        this.message = "Hapus!"
+      } else if (route === "HomePage") {
+        this.message = "Hapus!";
       } else {
-        this.message = "Perbarui!"
+        this.message = "Perbarui!";
       }
     },
     reloadPage() {

@@ -29,6 +29,7 @@ class ektpService {
 
 
 
+
     // ===== LIST ANGGOTA KELUARGA =====
 
     getAllAnggota() {
@@ -53,6 +54,10 @@ class ektpService {
 
     getIdKK(id_kk) {
         return http.get(`anggotaKeluarga/getIdKK/${id_kk}`);
+    }
+
+    deleteAllAnggota(id_kk) {
+        return http.delete(`anggotaKeluarga/deleteAllAnggota/${id_kk}`)
     }
 
 }

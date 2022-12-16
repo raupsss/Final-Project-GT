@@ -51,4 +51,10 @@ public class AnggotaKeluargaService implements IAnggotaKeluargaService {
         return anggotaKeluargaRepo.getIdKK(id_kk);
     }
 
+    @Override
+    public List<AnggotaKeluarga> deleteAllAnggota(String id_kk) {
+
+        return anggotaKeluargaRepo.deleteAllAnggota(id_kk);
+    }
+
 }

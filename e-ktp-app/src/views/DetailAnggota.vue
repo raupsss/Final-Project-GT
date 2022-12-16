@@ -14,7 +14,7 @@
           </button>
           <button
             type="submit"
-            class="btn btn-warning"
+            class="btn btn-warning text-white"
             @click.prevent="updateButton"
             v-show="!update"
           >
@@ -171,7 +171,7 @@
             <div v-show="update">
               <button
                 type="submit"
-                class="btn btn-danger mt-5"
+                class="btn btn-danger mt-5 mr-2"
                 @click.prevent="cancelUpdate"
               >
                 Cancel
